@@ -1,7 +1,7 @@
 "use client";
 import Rive from "@rive-app/react-canvas";
 import { motion, useAnimationFrame } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const Features = () => {
   return (
@@ -45,7 +45,9 @@ const Features = () => {
           <h3 className="text-white text-xl font-semibold">Tracking</h3>
           <p className="text-purple-400 text-3xl font-bold">256 Countries</p>
           <p className="text-gray-400 text-lg">in Single Project</p>
+
           <TrackingGlobe />
+
         </motion.div>
 
         {/* Accurate Estimations Card */}
@@ -181,9 +183,19 @@ const FloatingBox = ({
   right,
   bottom,
   speed,
-  scaleFactor,
-  rotateFactor,
-}: any) => {
+  scaleFactor = 0,
+  rotateFactor = 0,
+}: {
+    src: string;
+    size: number;
+    top?: string;
+    left?: string;
+    right?: string;
+    bottom?: string;
+    speed?: number;
+    scaleFactor?: number;
+    rotateFactor?: number;
+}) => {
   const ref = useRef<HTMLImageElement>(null);
 
   useAnimationFrame((t) => {
@@ -302,28 +314,28 @@ const TrackingGlobe = () => {
   );
 };
 
-const SpotlightEffect = () => {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+// const SpotlightEffect = () => {
+//   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    setCursorPos({
-      x: e.clientX - left,
-      y: e.clientY - top,
-    });
-  };
+//   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+//     const { left, top } = e.currentTarget.getBoundingClientRect();
+//     setCursorPos({
+//       x: e.clientX - left,
+//       y: e.clientY - top,
+//     });
+//   };
 
-  return (
-    <div className="relative w-full h-full" onMouseMove={handleMouseMove}>
-      {/* Spotlight Light Effect */}
-      <motion.div
-        className="absolute w-48 h-48 rounded-full bg-white/10 blur-3xl mix-blend-overlay pointer-events-none "  
-        animate={{
-          left: cursorPos.x - 96, // Center light
-          top: cursorPos.y - 96,
-        }}
-        transition={{ type: "tween", ease: "easeOut", duration: 0.1 }} // Smooth movement
-      />
-    </div>
-  );
-};
+//   return (
+//     <div className="relative w-full h-full" onMouseMove={handleMouseMove}>
+//       {/* Spotlight Light Effect */}
+//       <motion.div
+//         className="absolute w-48 h-48 rounded-full bg-white/10 blur-3xl mix-blend-overlay pointer-events-none "  
+//         animate={{
+//           left: cursorPos.x - 96, // Center light
+//           top: cursorPos.y - 96,
+//         }}
+//         transition={{ type: "tween", ease: "easeOut", duration: 0.1 }} // Smooth movement
+//       />
+//     </div>
+//   );
+// };
